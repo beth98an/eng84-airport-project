@@ -6,3 +6,6 @@
 - As an airport assistant, I want to create a flight trip with a specific destination.
 - As an airport assistant, I want to be able to generate a flight_attendees_list_report that lists passengers' names and passports to check identity.
 - As an airport assistant, I want to be able to add passengers to a flight so I can sell tickets to them
+
+
+## Github test
