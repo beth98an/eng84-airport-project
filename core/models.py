@@ -9,10 +9,11 @@
 # Aircraft (parent), Helicopter(child), Airplane(child)
 # Person(parent) User(child), Staff(user)
 
+# NOT SURE IF WE WILL NEED THIS CLASS
 # We will use this class for destinations and origins
-class Airport:
-    def __init__(self, name_airport):
-        self.name_airport = name_airport
+#class Airport:
+#    def __init__(self, name_airport):
+#        self.name_airport = name_airport
 
 class Terminal:
     def __init__(self, name_terminal):
