@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Airport App Home{% endblock %}
+{% block body_title %}Home{% endblock %}
+
+{% block content %}
+
+<hr>
+
+
+<h2>People</h2>
+  <ul style="list-style-type:none"> 
+    {% for person in queryset.persons %}
+    <li> {{person}} </li>
+    {% endfor %}
+  </ul>
+
+<h2>Staff</h2>
+  <ul style="list-style-type:none"> 
+    {% for person in queryset.staff %}
+    <li> {{person}} </li>
+    {% endfor %}
+  </ul>
+
+<h2>Users</h2>
+  <ul style="list-style-type:none"> 
+    {% for person in queryset.users %}
+    <li> {{person}} </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+
