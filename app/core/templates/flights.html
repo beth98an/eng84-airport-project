@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Airport App Flights List{% endblock %}
+{% block body_title %}Flights{% endblock %}
+
+{% block content %}
+
+<hr>
+
+
+<ul style="list-style-type:none"> 
+  {% for flight in queryset %}
+  <li> {{flight}} </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+
