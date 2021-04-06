@@ -1,6 +1,7 @@
 # Python Development
 .python-version
 __pycache__
+*.sqlite3
 
 venv/
 /.idea/
