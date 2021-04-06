@@ -1,33 +1,28 @@
 {% extends 'base.html' %}
 
 {% block head_title %}Airport App Home{% endblock %}
-{% block body_title %}Home{% endblock %}
+{% block body_title %}Welcome! {% endblock %}
 
 {% block content %}
 
 <hr>
+<p>Please select "Flights" to see the list of available flights and to manage flights, or select "Passengers" if you want to add/edit passengers.
+<br>
+<div class="row">
+  <div class="column">
+    <div class="center">
+    <button type="button" class="btn btn-success btn-lg">Flights</button>
+  </div>
+  </div>
+  <div class="column">
+        <div class="center">
+    <button type="button" class="btn btn-success btn-lg">Passengers</button>
+        </div>
+  </div>
+</div>
 
 
-<h2>People</h2>
-  <ul style="list-style-type:none"> 
-    {% for person in queryset.persons %}
-    <li> {{person}} </li>
-    {% endfor %}
-  </ul>
 
-<h2>Staff</h2>
-  <ul style="list-style-type:none"> 
-    {% for person in queryset.staff %}
-    <li> {{person}} </li>
-    {% endfor %}
-  </ul>
-
-<h2>Users</h2>
-  <ul style="list-style-type:none"> 
-    {% for person in queryset.passengers %}
-    <li> {{person}} </li>
-    {% endfor %}
-  </ul>
 {% endblock %}
 
 
