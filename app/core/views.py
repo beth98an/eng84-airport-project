@@ -13,7 +13,6 @@ from .models import Person, Staff, User
 # Create your views here.
 class HomeView(ListView):
     template_name = 'home.html'
-    context_object_name = 'objects'
     context_object_name = 'queryset'
 
     # Overwrite default 'get_queryset' method to get all the objects in the database
