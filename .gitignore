@@ -1,3 +1,6 @@
 # Python Development
 .python-version
-__pycache
+__pycache__
+
+venv/
+/.idea/
