@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 #
 from .models import Person, Staff, Passenger, Flight
@@ -32,7 +32,14 @@ class FlightListView(ListView):
     template_name = 'flights.html'
     context_object_name = 'queryset'
 
-
 # Passengers Page
+class PassengerListView(ListView):
+    model = Passenger
+    template_name = 'passengers.html'
+    context_object_name = 'queryset'
+
 
 # Flights Detail Page
+class FlightDetailView(DetailView):
+    model = Flight
+
