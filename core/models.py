@@ -1,38 +1,33 @@
-# command to install: pip install SQLAlchemy
-
 # Let's see the model of our project:
 
 # Class:
-# Airport
-# Terminal
+# Login
 # Flight
 # Aircraft (parent), Helicopter(child), Airplane(child)
 # Person(parent) User(child), Staff(user)
 
-# NOT SURE IF WE WILL NEED THIS CLASS
-# We will use this class for destinations and origins
-#class Airport:
-#    def __init__(self, name_airport):
-#        self.name_airport = name_airport
-
-
-class Terminal:
-    def __init__(self, name_terminal):
-        self.name_terminal = name_terminal
-
-
 class Flight:
-    def __init__(self, origin, destination, duration):
+    def __init__(self, origin, destination, departure_date, duration):
         self.origin = origin
         self.destination = destination
         self.duration = duration
+        self.departure_date = departure_date
         self.passenger_list = {}
 
+    # As an airport assistant, I want to be able to generate a flight_attendees_list_report that lists passengers' names and passports to check identity.
     def flight_attendees_list_report(self):
-        return "Here is the list with the name and passport..."
+        pass
 
-    def add_passeneger(self):
+    #  As an airport assistant, I want to be able to add passengers to a flight so I can sell tickets to them
+    def add_passeneger(self, User):
         #self.passenger_list.
+        pass
+
+    # As an airport assistant, I want to be able to assign or change flight destinations or departure dates with user passwords.
+    def change_flight_destination(self, destination):
+        pass
+
+    def change_flight_departure_date(self, departure_date):
         pass
 
 
@@ -67,8 +62,9 @@ class Planes(Aircraft):
 
 
 class Person:
-    def __init__(self, name, tax_number):
-        self.name = name
+    def __init__(self, first_name, last_name, tax_number):
+        self.first_name = first_name
+        self.last_name = last_name
         self.tax_number = tax_number
 
 
@@ -81,9 +77,14 @@ class User(Person):
 class Staff(Person):
     def __init__(self):
         super().__init__()
-            def create_passenger(self):
+
+    #  As an airport assistant, I want to be to create passengers with name AND passport number, so that I can add them flight.
+    def create_passenger(self, first_name, last_name, passport):
         pass
 
-    def create_flight_trip(self):
+    #As an airport assistant, I want to create a flight trip with a specific destination.
+    def create_flight_trip(self, origin, duration, departure_date, destination):
         pass
 
+class Login():
+    pass
