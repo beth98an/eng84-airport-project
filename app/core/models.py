@@ -37,6 +37,7 @@ class Passenger(Person):
 #         self.name_terminal = name_terminal
 # 
 # 
+
 class Flight(models.Model):
     """
     Class that defines the model for a flight
