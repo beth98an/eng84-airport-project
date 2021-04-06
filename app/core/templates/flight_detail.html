@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block head_title %}Airport App Flight Details{% endblock %}
+{% block body_title %}Flight Detail{% endblock %}
+
+{% block content %}
+
+<hr>
+<h2>
+{{ queryset }}
+</h2>
+<p>
+{{ queryset.departure_time}} until {{ queryset.duration}}
+</p>
+<p>
+Aircraft: {{ queryset.aircraft_id}}
+</p>
+<h3>
+  Passengers
+</h3>
+<ul>
+
+  {% for passenger in queryset.attendance.all %}
+  <li>
+    {{passenger}}
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+

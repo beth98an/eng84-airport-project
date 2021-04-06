@@ -10,7 +10,14 @@
 
 <ul style="list-style-type:none"> 
   {% for flight in queryset %}
-  <li> {{flight}} </li>
+  <li> 
+    <a href="{{flight.get_absolute_url}}" >
+      <!-- Added div for easier css -->
+      <div>
+        {{flight}}
+      </div>
+    </a>
+  </li>
   {% endfor %}
 </ul>
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
@@ -44,6 +45,11 @@ class Flight(models.Model):
     aircraft_id = models.ForeignKey('Aircraft', on_delete=models.CASCADE)
     attendance = models.ManyToManyField(Passenger, blank=True)
 
+    # Method that finds the url of a particular flight, given its id
+    def get_absolute_url(self):
+        return reverse('flight_detail', args=[str(self.flight_id)])
+
+    # Method that makes the flight look pretty when printed (made into string)
     def __str__(self):
         return f'Flight from {self.origin} to {self.destination}'
 

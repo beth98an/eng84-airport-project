@@ -42,4 +42,6 @@ class PassengerListView(ListView):
 # Flights Detail Page
 class FlightDetailView(DetailView):
     model = Flight
+    template_name = 'flight_detail.html'
+    context_object_name = 'queryset'
 
