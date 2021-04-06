@@ -15,9 +15,11 @@
 #    def __init__(self, name_airport):
 #        self.name_airport = name_airport
 
+
 class Terminal:
     def __init__(self, name_terminal):
         self.name_terminal = name_terminal
+
 
 class Flight:
     def __init__(self, origin, destination, duration):
@@ -32,6 +34,7 @@ class Flight:
     def add_passeneger(self):
         #self.passenger_list.
         pass
+
 
 class Aircraft:
     def __init__(self, fuel, flight_capacity):
@@ -50,32 +53,37 @@ class Aircraft:
         pass
         #return "Let's fuel up..."
 
+
 class Helicopter(Aircraft):
     def __init__(self, model):
         super().__init__()
         self.model = model
+
 
 class Planes(Aircraft):
     def __init__(self, model):
         super().__init__()
         self.model = model
 
+
 class Person:
     def __init__(self, name, tax_number):
         self.name = name
         self.tax_number = tax_number
+
 
 class User(Person):
     def __init__(self, passport):
         super().__init__()
         self.passport = passport
 
+
 class Staff(Person):
     def __init__(self):
         super().__init__()
-
-    def create_passenger(self):
+            def create_passenger(self):
         pass
 
     def create_flight_trip(self):
         pass
+
