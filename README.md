@@ -2,9 +2,9 @@
 Python Project for SpartaGlobal Engineering 84 DevOps Stream.
 
 ## Table of Contents
-- [User Stories](##user-stories)
-- [Documentation](##documentation)
-- [Project Structure](##project-structure)
+- [User Stories](#user-stories)
+- [Documentation](#documentation)
+- [Project Structure](#project-structure)
 
 
 ## User Stories
