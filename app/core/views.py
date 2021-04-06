@@ -3,14 +3,14 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 #
-from .models import Person, Staff, User
+from .models import Person, Staff, Passenger, Flight
 
 # from django.http import HttpResponse
 
 # def index(request):
 #     return HttpResponse("Hello World")
 
-# Create your views here.
+# Login Page
 class HomeView(ListView):
     template_name = 'home.html'
     context_object_name = 'queryset'
@@ -21,6 +21,18 @@ class HomeView(ListView):
         queryset = {
                 'persons': Person.objects.all(),
                 'staff': Staff.objects.all(),
-                'users': User.objects.all(),
+                'passengers': Passenger.objects.all(),
                 }
         return queryset
+
+
+# Flights Page
+class FlightListView(ListView):
+    model = Flight
+    template_name = 'flights.html'
+    context_object_name = 'queryset'
+
+
+# Passengers Page
+
+# Flights Detail Page
