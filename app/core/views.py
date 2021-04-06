@@ -24,3 +24,6 @@ class HomeView(ListView):
                 'users': User.objects.all(),
                 }
         return queryset
+
+    def flights(self):
+        pass
