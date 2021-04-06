@@ -9,10 +9,11 @@
 # Aircraft (parent), Helicopter(child), Airplane(child)
 # Person(parent) User(child), Staff(user)
 
+# NOT SURE IF WE WILL NEED THIS CLASS
 # We will use this class for destinations and origins
-class Airport:
-    def __init__(self, name_airport):
-        self.name_airport = name_airport
+#class Airport:
+#    def __init__(self, name_airport):
+#        self.name_airport = name_airport
 
 
 class Terminal:
@@ -21,18 +22,36 @@ class Terminal:
 
 
 class Flight:
-    def __init__(self, origin, destination, duration, passenger_list):
+    def __init__(self, origin, destination, duration):
         self.origin = origin
         self.destination = destination
         self.duration = duration
-        self.passenger_list = passenger_list
+        self.passenger_list = {}
+
+    def flight_attendees_list_report(self):
+        return "Here is the list with the name and passport..."
+
+    def add_passeneger(self):
+        #self.passenger_list.
+        pass
 
 
 class Aircraft:
-    def __init__(self, number_fly, place_land, fuel_up):
-        self.number_fly = number_fly
-        self.place_land = place_land
-        self.fuel_up = fuel_up
+    def __init__(self, fuel, flight_capacity):
+        self.fuel = fuel
+        self.flight_capacity = flight_capacity
+
+    def fly_trip(self):
+        #return "Let's go..."
+        pass
+
+    def land_trip(self):
+        #return "Arriving..."
+        pass
+
+    def fuel_up(self):
+        pass
+        #return "Let's fuel up..."
 
 
 class Helicopter(Aircraft):
@@ -62,3 +81,9 @@ class User(Person):
 class Staff(Person):
     def __init__(self):
         super().__init__()
+            def create_passenger(self):
+        pass
+
+    def create_flight_trip(self):
+        pass
+
