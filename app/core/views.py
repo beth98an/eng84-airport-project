@@ -1,9 +1,10 @@
 from django.shortcuts import render
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 #
-from .models import Person, Staff, Passenger, Flight
+from .models import Person, Staff, Passenger, Flight, Aircraft
+from .forms import FlightsForm
 
 # from django.http import HttpResponse
 
@@ -38,10 +39,49 @@ class PassengerListView(ListView):
     template_name = 'passengers.html'
     context_object_name = 'queryset'
 
+class PassengerView(CreateView):
+    model = Passenger
+    template_name = "add_passenger.html"
+    fields = "__all__"
+    #fields = ["first_name", "last_name", "tax_number", "passport_num"]
+    #success_url = "/passengers"
+
+class PassengerDetailView(DetailView):
+    model = Passenger
+    template_name = 'passenger_detail.html'
+    context_object_name = 'queryset'
+
 
 # Flights Detail Page
+
 class FlightDetailView(DetailView):
     model = Flight
     template_name = 'flight_detail.html'
     context_object_name = 'queryset'
 
+
+class FlightCreateView(CreateView):
+    model = Flight
+    template_name = 'flight_create.html'
+    form_class = FlightsForm
+
+class FlightUpdateView(UpdateView):
+    model = Flight
+    template_name = 'flight_update.html'
+    form_class = FlightsForm
+
+class AircraftListView(ListView):
+    model = Aircraft
+    template_name = 'aircrafts.html'
+    context_object_name = 'queryset'
+
+class AircraftCreateView(CreateView):
+    model = Aircraft 
+    template_name = 'aircraft_create.html'
+    fields = '__all__'
+
+# class PassengerCreateView(CreateView):
+#     model = Passenger
+#     fields = '__all__'
+#     template_name = 'passenger_create.html'
+# 

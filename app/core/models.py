@@ -28,6 +28,10 @@ class Passenger(Person):
         return f'{self.first_name} {self.last_name}'
 
 
+    def get_absolute_url(self):
+        return reverse("passenger_detail", args=[str(self.pk)])
+
+
 
 class Flight(models.Model):
     """
@@ -66,6 +70,12 @@ class Aircraft(models.Model):
     model = models.CharField(max_length=10)
     manufacturer = models.CharField(max_length=20)
     capacity = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.model} no{self.aircraft_id} by {self.manufacturer}'
+
+    def get_absolute_url(self):
+        return reverse('aircrafts')
 
 
 
