@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+
+{% block body_title %}Passenger Details{% endblock %}
+{% block content %}
+<p>passenger details</p>
+
+<hr>
+<h2>
+{{ queryset }}
+</h2>
+<p>
+{{ queryset.passport_num}}
+</p>
+
+{% endblock %}

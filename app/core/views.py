@@ -39,8 +39,21 @@ class PassengerListView(ListView):
     template_name = 'passengers.html'
     context_object_name = 'queryset'
 
+class PassengerView(CreateView):
+    model = Passenger
+    template_name = "add_passenger.html"
+    fields = "__all__"
+    #fields = ["first_name", "last_name", "tax_number", "passport_num"]
+    #success_url = "/passengers"
+
+class PassengerDetailView(DetailView):
+    model = Passenger
+    template_name = 'passenger_detail.html'
+    context_object_name = 'queryset'
+
 
 # Flights Detail Page
+
 class FlightDetailView(DetailView):
     model = Flight
     template_name = 'flight_detail.html'

@@ -28,6 +28,10 @@ class Passenger(Person):
         return f'{self.first_name} {self.last_name}'
 
 
+    def get_absolute_url(self):
+        return reverse("passenger_detail", args=[str(self.pk)])
+
+
 
 class Flight(models.Model):
     """
