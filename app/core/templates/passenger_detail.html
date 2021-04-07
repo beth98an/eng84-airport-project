@@ -4,14 +4,22 @@
 
 {% block body_title %}Passenger Details{% endblock %}
 {% block content %}
-<p>passenger details</p>
+
 
 <hr>
-<h2>
-{{ queryset }}
-</h2>
 <p>
-{{ queryset.passport_num}}
+    Passenger ID: <b>{{ queryset.id }}</b>
+</p>
+<p>
+    Full Name: <b>{{ queryset }}</b>
+</p>
+
+<p>
+    Date of Birth: <b>{{ queryset.dob}}</b>
+</p>
+
+<p>
+    Passport number: <b>{{ queryset.passport_num}}</b>
 </p>
 
 {% endblock %}
