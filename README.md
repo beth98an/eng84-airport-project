@@ -36,7 +36,16 @@ python -m pip install -r requirements.txt
 ```
 > *Note: Might need to substitude `python` with `python3` in certain linux distributions. If `python --version` outputs a python version of 3.x+ then the above snippet will work properly.*
 
-After all the requirements are installed, the app will be ready to run. Change directory to the `app/` folder, then type:
+After all the requirements are installed, the app will be almost ready to run. Change directory to the `app/` folder, then enter the following commands sequentially.
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+As the database is not tracked in the github repository, you need to create a new `sqlite3` database on your machine. With the above commands, the database is initialised with the models required.
+
+If you already have a previous version of the project, some conflicts will arise with the database. It might be more beneficial to remove `db.sqlite3` and try again, if the issue cannot be resolved via the commandline.
+
+After the migrations are complete, it is time to run the project on a localhost:
 ```bash
 python manage.py runserver
 ```
