@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+
+{% block body_title %}Passenger Details{% endblock %}
+{% block content %}
+<p>passenger details</p>
+
+<hr>
+<h2>
+{{ queryset }}
+</h2>
+<p>
+{{ queryset.passport_num}}
+</p>
+
+{% endblock %}
