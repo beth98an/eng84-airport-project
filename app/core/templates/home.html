@@ -6,17 +6,23 @@
 {% block content %}
 
 <hr>
-<p>Please select "Flights" to see the list of available flights and to manage flights, or select "Passengers" if you want to add/edit passengers.
+<ul>
+    <li> Select "Flights" to see the list of available flights</li>
+    or
+    <li> Select "Passengers" to see the list of all passengers</li>
+</ul>
+
+
 <br>
 <div class="row">
   <div class="column">
     <div class="center">
-    <button type="button" class="btn btn-success btn-lg">Flights</button>
+    <a class="btn btn-success btn-lg" href="{% url 'flights' %}" role="button">Flights</a>
   </div>
   </div>
   <div class="column">
         <div class="center">
-    <button type="button" class="btn btn-success btn-lg">Passengers</button>
+    <a class="btn btn-success btn-lg" href="{% url 'passengers' %}" role="button">Passengers</a>
         </div>
   </div>
 </div>
