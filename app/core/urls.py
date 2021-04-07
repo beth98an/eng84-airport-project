@@ -4,7 +4,8 @@ from . import views
 from django.conf.urls.static import static
 
 from .views import (HomeView, FlightListView, PassengerListView, FlightDetailView, FlightCreateView,
-                    FlightUpdateView, AircraftListView, AircraftCreateView, PassengerView, PassengerDetailView)
+                    FlightUpdateView, AircraftListView, AircraftCreateView, PassengerView, PassengerDetailView,
+                    AircraftDetailView)
 
 urlpatterns = [
         path('', HomeView.as_view(), name='index'),
@@ -17,5 +18,6 @@ urlpatterns = [
         path('flights/create', FlightCreateView.as_view(), name='flight_create'),
         path('flights/<int:pk>/update', FlightUpdateView.as_view(), name='flight_update'),
         path('aircrafts/', AircraftListView.as_view(), name='aircrafts'),
+        path('aircrafts/<int:pk>', AircraftDetailView.as_view(), name='aircraft_details'),
         path('aircrafts/create', AircraftCreateView.as_view(), name='aircraft_create'),
         ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
