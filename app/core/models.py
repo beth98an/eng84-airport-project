@@ -1,10 +1,12 @@
 from django.db import models
 from django.urls import reverse
 
+
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    tax_number = models.IntegerField()
+    DOB = models.DateField(max_length=8)
+    ticket_number = models.IntegerField((), unique=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -27,10 +29,8 @@ class Passenger(Person):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
-
     def get_absolute_url(self):
         return reverse("passenger_detail", args=[str(self.pk)])
-
 
 
 class Flight(models.Model):
@@ -78,7 +78,6 @@ class Aircraft(models.Model):
         return reverse('aircrafts')
 
 
-
 # class Airport:
 #     def __init__(self, name_airport):
 #         self.name_airport = name_airport
@@ -89,8 +88,6 @@ class Aircraft(models.Model):
 #         self.name_terminal = name_terminal
 # 
 # 
-
-
 
 
 '''
