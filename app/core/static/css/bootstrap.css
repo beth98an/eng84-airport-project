@@ -28,3 +28,10 @@
   clear: both;
 }
 
+.form-container {
+  display: box;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%
+}
+

@@ -28,5 +28,7 @@ Aircraft: {{ queryset.aircraft_id}}
   {% endfor %}
 </ul>
 
+<a href="{% url 'flight_edit' queryset.flight_id %}">Edit Flight</a>
+
 {% endblock %}
 

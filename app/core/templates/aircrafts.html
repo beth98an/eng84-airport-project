@@ -1,7 +1,8 @@
+
 {% extends 'base.html' %}
 
 {% block head_title %}Airport App Flights List{% endblock %}
-{% block body_title %}Flights{% endblock %}
+{% block body_title %}Aircrafts{% endblock %}
 
 {% block content %}
 
@@ -20,7 +21,7 @@
   </li>
   {% endfor %}
 </ul>
-<a href="{% url 'flight_create' %}">Add new flight +</a>
+<a href="{% url 'aircraft_create' %}">Add new aircraft+</a>
 
 {% endblock %}
 
