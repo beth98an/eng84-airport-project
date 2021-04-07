@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
@@ -27,16 +28,6 @@ class Passenger(Person):
         return f'{self.first_name} {self.last_name}'
 
 
-# class Airport:
-#     def __init__(self, name_airport):
-#         self.name_airport = name_airport
-# 
-# 
-# class Terminal:
-#     def __init__(self, name_terminal):
-#         self.name_terminal = name_terminal
-# 
-# 
 
 class Flight(models.Model):
     """
@@ -52,49 +43,45 @@ class Flight(models.Model):
     departure_time = models.DateTimeField('Departure Time')
     duration = models.TimeField('Duration')
     aircraft_id = models.ForeignKey('Aircraft', on_delete=models.CASCADE)
-    attendance = models.ManyToManyField(Passenger)
+    attendance = models.ManyToManyField(Passenger, blank=True)
 
+    # Method that finds the url of a particular flight, given its id
+    def get_absolute_url(self):
+        return reverse('flight_detail', args=[str(self.flight_id)])
+
+    # Method that makes the flight look pretty when printed (made into string)
     def __str__(self):
         return f'Flight from {self.origin} to {self.destination}'
 
 
 class Aircraft(models.Model):
-    pass
+    """
+    Class that holds the type of aircraft
+    """
     # def __init__(self, number_fly, place_land, fuel_up):
     #     self.number_fly = number_fly
     #     self.place_land = place_land
     #     self.fuel_up = fuel_up
+    aircraft_id = models.AutoField(primary_key=True, null=False, blank=False)
+    model = models.CharField(max_length=10)
+    manufacturer = models.CharField(max_length=20)
+    capacity = models.IntegerField()
 
 
-# class Helicopter(Aircraft):
-#     def __init__(self, model):
-#         super().__init__()
-#         self.model = model
+
+# class Airport:
+#     def __init__(self, name_airport):
+#         self.name_airport = name_airport
 # 
 # 
-# class Planes(Aircraft):
-#     def __init__(self, model):
-#         super().__init__()
-#         self.model = model
+# class Terminal:
+#     def __init__(self, name_terminal):
+#         self.name_terminal = name_terminal
 # 
 # 
-# class Person:
-#     def __init__(self, name, tax_number):
-#         self.name = name
-#         self.tax_number = tax_number
-# 
-# 
-# class User(Person):
-#     def __init__(self, passport):
-#         super().__init__()
-#         self.passport = passport
-# 
-# 
-# class Staff(Person):
-#     def __init__(self):
-#         super().__init__()
-# 
-# # Create your models here.
+
+
+
 
 '''
 # Let's see the model of our project:
