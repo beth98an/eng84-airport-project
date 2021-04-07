@@ -3,7 +3,7 @@
 
 
 {% block head_title %}Airport App Passengers List{% endblock %}
-{% block body_title %}Passengers{% endblock %}
+{% block body_title %}Add Passengers{% endblock %}
 
 
 
@@ -17,14 +17,23 @@
 <!--</ul>-->
 {% block content %}
 
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
 
+    {{form.media}}
+
+
+<!--
     <p>add passenger</p>
+-->
+<div class="form-container">
     <form method="POST">
         {% csrf_token %}
         {{form.as_p }}
         <button type="submit" class="btn btn-info">Add passenger</button>
 
     </form>
-
+</div>
 
 {% endblock %}

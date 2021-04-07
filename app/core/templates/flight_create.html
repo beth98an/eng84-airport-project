@@ -4,6 +4,13 @@
 {% block body_title %}Create Flight{% endblock %}
 
 {% block content %}
+
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+    {{form.media}}
+
 <div class="form-container">
   <form method="post" >
     <div class="form-group">
