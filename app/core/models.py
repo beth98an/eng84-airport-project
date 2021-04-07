@@ -67,6 +67,12 @@ class Aircraft(models.Model):
     manufacturer = models.CharField(max_length=20)
     capacity = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.model} no{self.aircraft_id} by {self.manufacturer}'
+
+    def get_absolute_url(self):
+        return reverse('aircrafts')
+
 
 
 # class Airport:
