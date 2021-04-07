@@ -1,33 +1,19 @@
 
 {% extends 'base.html' %}
 
+{% block body_title %}List of passengers:{% endblock %}
 
-{% block head_title %}Airport App Passengers List{% endblock %}
-{% block body_title %}Passengers{% endblock %}
-
-
-
-<hr>
 
 {% block content %}
+<hr>
 <ul style="list-style-type:none">
   {% for passenger in queryset %}
-  <li> {{passenger}} </li>
+     <a href="{{passenger.get_absolute_url}}" >
+  <li> {{passenger.id}}. {{passenger}} </li>
   {% endfor %}
 </ul>
 
 <a href="{% url 'add_passengers' %}">Create new Passenger +</a>
-
-
-
-<!--    <p>add passenger</p>-->
-<!--    <form method="POST">-->
-<!--        {% csrf_token %}-->
-<!--        {{form.as_p }}-->
-<!--        <button type="submit" class="btn btn-info">Add passenger</button>-->
-
-<!--    </form>-->
-
 
 {% endblock %}
 
