@@ -1,9 +1,8 @@
 from django.test import TestCase
 '''
-from ..models import Flight
+from ..models import Aircraft
 
 # We will test if a Flight was created
-class FlightTestCase(TestCase):
+class AircraftTestCase(TestCase):
     pass
-
 '''

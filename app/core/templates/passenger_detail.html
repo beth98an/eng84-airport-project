@@ -7,6 +7,7 @@
 
 
 <hr>
+<div class='passenger-details'>
 <p>
     Passenger ID: <b>{{ queryset.id }}</b>
 </p>
@@ -21,5 +22,7 @@
 <p>
     Passport number: <b>{{ queryset.passport_num}}</b>
 </p>
-
+</div>
+{% load static %}
+<img class='passenger-details-pic' src="{% static "ilustrations/5.png" %}" alt="My image"/>
 {% endblock %}

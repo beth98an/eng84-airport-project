@@ -5,6 +5,7 @@
 {% block content %}
 
 <hr>
+<div class='aircraft-details'>
 <p>ID</p>
 <p>{{queryset.aircraft_id}}</p>
 <p>Model</p>
@@ -15,4 +16,8 @@
 <p>{{queryset.capacity}}</p>
 
   <p>Test</p>
+
+</div>
+{% load static %}
+<img class='aircraft-details-pic' src="{% static "ilustrations/6.png" %}" alt="My image"/>
 {% endblock %}
