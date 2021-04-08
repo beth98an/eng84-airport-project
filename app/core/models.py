@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, UserManager, User
 
 
 class Person(models.Model):
@@ -14,17 +14,14 @@ class Person(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
-class Staff(AbstractBaseUser, Person):
-    # employee_id = models.AutoField(primary_key=True)
+class Staff(User):
 
-    email = models.CharField(max_length=100, unique=True)
-    role = models.CharField(max_length=30)
-
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['first_name',]
-    
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    def get_absolute_url(self):
+        return reverse("staff_detail", args=[str(self.pk)])
+
 
 
 # Note: Renamed from User to avoid conflicts

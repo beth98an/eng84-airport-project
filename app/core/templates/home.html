@@ -6,25 +6,19 @@
 {% block content %}
 
 <hr>
-<ul>
-    <li> Select "Flights" to see the list of available flights</li>
-    or
-    <li> Select "Passengers" to see the list of all passengers</li>
+<h2 class=form-container>
+Upcoming Flights
+</h2>
+<div class = 'flights-list'>
+<ul  style="list-style-type:none"> 
+  {% for flight in queryset.flights %}
+  <li class="flight"> 
+      <div >
+        {{flight}} at {{flight.departure_time}}
+      </div>
+  </li>
+  {% endfor %}
 </ul>
-
-
-<br>
-<div class="row">
-  <div class="column">
-    <div class="center">
-    <a class="btn btn-success btn-lg" href="{% url 'flights' %}" role="button">Flights</a>
-  </div>
-  </div>
-  <div class="column">
-        <div class="center">
-    <a class="btn btn-success btn-lg" href="{% url 'passengers' %}" role="button">Passengers</a>
-        </div>
-  </div>
 </div>
 
 

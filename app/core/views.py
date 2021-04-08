@@ -126,8 +126,9 @@ class AircraftDetailView(DetailView):
            STAFF
 """
 
+
 class StaffListView(ListView):
-    model = Staff 
+    model = Staff
     template_name = 'staff_list.html'
     context_object_name = 'queryset'
 
@@ -137,10 +138,16 @@ class StaffCreateView(CreateView):
     template_name = "staff_create.html"
     form_class = StaffForm
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.username = self.request.email
+        self.object.save()
+
+
 
 class StaffUpdateView(UpdateView):
     model = Staff
-    template_name = "staff_create.html"
+    template_name = "staff_update.html"
     form_class = StaffForm
 
 

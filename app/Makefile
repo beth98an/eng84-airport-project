@@ -1,7 +1,7 @@
 
 migration:
-	rm db.sqlite3
-	rm -rv core/migrations/00*
+	-rm db.sqlite3
+	-rm -rv core/migrations/00*
 	python manage.py makemigrations
 	python manage.py migrate
 	python manage.py createsuperuser

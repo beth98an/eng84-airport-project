@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+
+{% block head_title %}Airport App Staff Details{% endblock %}
+{% block body_title %}{{object.first_name}} {{object.last_name}} Details{% endblock %}
+
+{% block content %}
+
+<hr>
+<div class='flight-details'>
+<p>
+Email: {{ queryset.email}}
+</p>
+<p>
+Date of Birth: {{ queryset.dob}}
+</p>
+
+<p>
+Role: {{ queryset.role}}
+</p>
+
+</br>
+
+
+
+<a href="{% url 'staff_update' queryset.pk %}">Edit Details</a>
+</div>
+{% load static %}
+<img class='flight-details-pic' src="{% static "ilustrations/4.png" %}" alt="My image"/>
+{% endblock %}
+

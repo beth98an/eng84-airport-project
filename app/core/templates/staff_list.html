@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Airport App Staff List{% endblock %}
+{% block body_title %}Staff{% endblock %}
+
+{% block content %}
+
+<hr>
+
+<div class = 'flights-list'>
+<ul  style="list-style-type:none"> 
+  {% for staff in queryset %}
+  <li class="flight"> 
+    <a href="{{staff.get_absolute_url}}" >
+      <div >
+        {{staff}}
+      </div>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+<a href="{% url 'staff_create' %}">Add staff+</a>
+</div>
+{% load static %}
+<img class='flights-list-pic' src="{% static "ilustrations/1.png" %}" alt="My image"/>
+{% endblock %}
+
