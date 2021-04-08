@@ -9,6 +9,8 @@ Python Project for SpartaGlobal Engineering 84 DevOps Stream.
 - [Gitflow](#gitflow)
 - [Project Structure](#project-structure)
 - [Entity Relationship Diagram](#entity-relationship-diagram)
+- [TDD](#test-driven-development)
+
 
 ## User Stories
 
@@ -131,6 +133,86 @@ You should have 4 configured remote repo 2 for your forked repo as `origin` and 
 ![ERD](./assets/Airport_ERD.png)
 
 Our diagram is based on the User stories as well as on the different functionalities that our interface will cover.
-Django’s model makes use of a powerful ORM layer which simplifies dealing with the database and the data and accelerates the development process. Easy Database Migrations and easy database management. In this way we can have a persistent database for the reason that we will be using SQLite.
+Django’s model makes use of a powerful ORM layer which simplifies dealing with the database and the data and accelerates the development process. Easy Database Migrations and easy database management. Our database is structured for the following tables:
 - On one hand we have the entity of staff and login that have a one-to-one relationship because each user has their own login details and does not belong to anyone else. Database allows you to create whatever you want but we will restrict from people some functions. For that reason we have these two entities in the backend so that only we can control it.
 - On the other hand we have the entities of flight and user, which is a many-to-many relationship since a user can have several flights and a flight can have several users. The last entity that we have is aircraft that has a relationship of one to many for the reason that an airplane can be assigned to different flights but a flight can only have one airplane for the trip obviously. These entities are the ones that will be used the most depending on the assistant and the functionalities and thanks that django is going to generate the database automatically with which we can migrate it and make use of it, and this is the reason that we have it separated.
+
+Much appreciated to the chart we were able to center on the concept of OOP. It made a difference us choose how numerous classes we are planning to need to make, what attributes and methods each of these objects will have, and in this way we are able reuse the code within the diverse pages without having to rehash it. As a result of the ERD, code with OOP plan is adaptable, measured, and abstract.
+
+## Test Driven Development
+
+One of the requirements of the project was the use of the TDD software. Test-driven development is a software development process relying on software requirements being converted to test cases before software is fully developed. In simple terms, test cases for each functionality are created and tested. In the following image we proceed to see how the life cycle is:
+
+![TDD_SCHEME](./assets/TDD.png)
+
+- TDD cycle start with everything failing - RED
+- Write code to pass the test - GREEN
+- Refactor the code for the next test - BLUE
+- This continues until all the test have successfully passed.
+
+For the reason that at the time of implementation, the different developers have carried out the implementation of each functionality separately, in such a way that with TDD it has been easier for us to test each of the functionalities in the backend before proceeding to merge the code of each of the developers. TDD helps reduce the unexpected errors and the code becomes clearer and simple to understand. It's like an API Feedback. In such a way that when we have all the code together, all this information can solve future problems, we will save time and cost of the product and the code will be much cleaner.
+
+We will use Pytest unittest in Python to implement TDD.
+
+Let's proceed to create an example:
+
+- We proceed to create an instance of the passenger class in a manner that we insert its data into the database. We proceed to carry out the test with the test_passenger method in which we compare each of the passenger's attributes, but in the case of the passport we proceed to compare it with a different passport.
+````python
+from django.test import TestCase
+from ..models import Passenger
+# We will run tests for Person, Staff and Passenger
+class PassengerTestCase(TestCase):
+
+    # Let's define the objects that we will test if they have been added in the database
+    def setUp(self):
+        Passenger.objects.create(first_name="Paul", last_name="Kane", dob="1994-06-14", passport_num="123456ABC")
+    
+        def test_passenger(self):
+        passenger1 = Passenger.objects.get(id=5)
+        self.assertEqual(passenger1.first_name, "Paul")
+        self.assertEqual(passenger1.last_name, "Kane")
+        self.assertEqual(str(passenger1.dob), "1994-06-14")
+        self.assertEqual(passenger1.passport_num, "456789QWE")
+````
+
+- We proceed to run the test.
+````
+(venv) C:\Users\alfonso\PycharmProjects\eng84_Airport_Project\eng84-airport-project\app>python manage.py test
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+F
+======================================================================
+FAIL: test_passenger (core.tests.test_passenger.PassengerTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\alfonso\PycharmProjects\eng84_Airport_Project\eng84-airport-project\app\core\tests\test_passenger.py", line 32, in test_passenger
+    self.assertEqual(passenger1.passport_num, "456789QWE")
+AssertionError: '123456ABC' != '456789QWE'
+- 123456ABC
++ 456789QWE
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.050s
+
+FAILED (failures=1)
+Destroying test database for alias 'default'...
+````
+
+- We proceed to write the code correctly so that it passes the test:
+````python
+self.assertEqual(passenger1.passport_num, "123456ABC")
+````
+
+- We can see that the test has been passed successfully.
+````
+(venv) C:\Users\alfonso\PycharmProjects\eng84_Airport_Project\eng84-airport-project\app>python manage.py test
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.013s
+
+OK
+Destroying test database for alias 'default'...
+````
