@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-{% block head_title %}Airport App Flights List{% endblock %}
-{% block body_title %}Flights{% endblock %}
+{% block head_title %}Airport App Staff List{% endblock %}
+{% block body_title %}Staff{% endblock %}
 
 {% block content %}
 
@@ -9,18 +9,17 @@
 
 <div class = 'flights-list'>
 <ul  style="list-style-type:none"> 
-  {% for flight in queryset %}
+  {% for staff in queryset %}
   <li class="flight"> 
-    <a href="{{flight.get_absolute_url}}" >
-      <!-- Added div for easier css -->
+    <a href="{{staff.get_absolute_url}}" >
       <div >
-        {{flight}}
+        {{staff}}
       </div>
     </a>
   </li>
   {% endfor %}
 </ul>
-<a href="{% url 'flight_create' %}">Add new flight +</a>
+<a href="{% url 'staff_create' %}">Add staff+</a>
 </div>
 {% load static %}
 <img class='flights-list-pic' src="{% static "ilustrations/1.png" %}" alt="My image"/>

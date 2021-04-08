@@ -7,6 +7,7 @@
 {% block content %}
 
 <hr>
+<div class='flight-details'>
 <h2>
 {{ queryset }}
 </h2>
@@ -18,7 +19,7 @@ Aircraft: {{ queryset.aircraft_id}}
 </p>
 
 </br>
-<h4>Available Seats: </h4>
+<h4>Available Seats: {{available}}</h4>
 
 <h3>
   Passengers
@@ -33,6 +34,8 @@ Aircraft: {{ queryset.aircraft_id}}
 </ul>
 
 <a href="{% url 'flight_update' queryset.flight_id %}">Edit Flight</a>
-
+</div>
+{% load static %}
+<img class='flight-details-pic' src="{% static "ilustrations/4.png" %}" alt="My image"/>
 {% endblock %}
 

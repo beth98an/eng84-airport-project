@@ -8,13 +8,13 @@
 
 <hr>
 
-
+<div class='aircrafts-list'>
 <ul style="list-style-type:none"> 
   {% for flight in queryset %}
   <li> 
     <a href="{{flight.get_absolute_url}}" >
       <!-- Added div for easier css -->
-      <div>
+      <div class='aircraft'>
         {{flight}}
       </div>
     </a>
@@ -22,6 +22,8 @@
   {% endfor %}
 </ul>
 <a href="{% url 'aircraft_create' %}">Add new aircraft+</a>
-
+</div>
+{% load static %}
+<img class='aircrafts-list-pic' src="{% static "ilustrations/3.png" %}" alt="My image"/>
 {% endblock %}
 

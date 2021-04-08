@@ -6,15 +6,18 @@
 
 {% block content %}
 <hr>
+<div class='passengers-list'>
 <ul style="list-style-type:none">
   {% for passenger in queryset %}
      <a href="{{passenger.get_absolute_url}}" >
-  <li> {{passenger.id}}. {{passenger}} </li>
+  <li class='passenger'> {{passenger.id}}. {{passenger}} </li>
   {% endfor %}
 </ul>
 
 <a href="{% url 'add_passengers' %}">Create new Passenger +</a>
-
+</div>
+{% load static %}
+<img class='passengers-list-pic' src="{% static "ilustrations/2.png" %}" alt="My image"/>
 {% endblock %}
 
 
