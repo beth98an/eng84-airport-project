@@ -19,7 +19,9 @@
 
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'index' %}">Airport App</a>
+    
+    <a class="navbar-brand" href="{% url 'index' %}">Airport App</a> 
+  
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -43,11 +45,12 @@
   </nav>
 
 
-
-    <h1>
+<div class = 'body-title'>
+    <h1 >
       {% block body_title %}
       {% endblock %}
     </h1>
+  </div>
     {% block content %}
     {% endblock %}
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
