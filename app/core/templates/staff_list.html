@@ -22,7 +22,7 @@
     </thead>
     <tbody>
     {% for staff in queryset %}
-        <tr class='clickable-row' onclick="window.location='{{flight.get_absolute_url}}';">
+        <tr class='clickable-row' onclick="window.location='{{staff.get_absolute_url}}';">
               <th scope="row">{{staff.id}}</th>
               <td>{{staff.first_name}} {{staff.last_name}}</td>
               <td>{{staff.email}}</td>

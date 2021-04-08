@@ -18,10 +18,42 @@
   }
 },
 {
+  "model": "core.person",
+  "pk": 3,
+  "fields": {
+    "first_name": "Kelly",
+    "last_name": "Sharpe",
+    "dob": "1942-02-18"
+  }
+},
+{
+  "model": "core.person",
+  "pk": 4,
+  "fields": {
+    "first_name": "Leslie",
+    "last_name": "Benbow",
+    "dob": "1990-11-19"
+  }
+},
+{
   "model": "core.passenger",
   "pk": 1,
   "fields": {
     "passport_num": "9806 3549"
+  }
+},
+{
+  "model": "core.passenger",
+  "pk": 3,
+  "fields": {
+    "passport_num": "1Z4220Y8"
+  }
+},
+{
+  "model": "core.passenger",
+  "pk": 4,
+  "fields": {
+    "passport_num": "7SSVH5804"
   }
 },
 {

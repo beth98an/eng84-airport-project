@@ -12,7 +12,7 @@ from .models import Flight, Aircraft, Passenger, Staff
 class FlightsForm(forms.ModelForm):
     class Meta:
         model = Flight
-        fields = ('origin', 'destination', 'departure_time', 'duration', 'aircraft_id', 'attendance')
+        fields = ('origin', 'destination', 'departure_time', 'duration', 'aircraft_id', 'attendance', 'crew')
 
         widgets = {
                 'origin': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Stansted'}),
@@ -21,6 +21,7 @@ class FlightsForm(forms.ModelForm):
                 'duration': TimePickerInput(attrs={'class': 'form-control'}),
                 'aircraft_id': forms.Select(attrs={'class': 'form-control'}),
                 'attendance': forms.SelectMultiple(attrs={'class': 'form-control'}),
+                'crew': forms.SelectMultiple(attrs={'class': 'form-control'})
                 }
 
 
@@ -46,7 +47,7 @@ class StaffForm(forms.ModelForm):
 
     class Meta:
         model = Staff 
-        fields = ('first_name', 'last_name', 'email', 'password', 'password_confirm')
+        fields = ('first_name', 'last_name', 'dob', 'email',  'role', 'password', 'password_confirm')
 
 
         widgets = {
@@ -54,6 +55,12 @@ class StaffForm(forms.ModelForm):
                 'last_name': forms.TextInput(attrs={'class': 'form-control'}),
                 'email': forms.EmailInput(attrs={'class': 'form-control'}),
                 'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+                'dob': DatePickerInput(attrs={'label': 'Date of Birth'}),
+                'role': forms.Select(attrs={'class': 'form-control'}),
+                }
+
+        labels = {
+                'dob': _('Date of Birth'),
                 }
 
     def clean(self, *args, **kwargs):

@@ -2,8 +2,7 @@
   font-size: 100%;
   font-family: 'Cairo', serif;
  }
-.column {
-  float: left;
+.column { float: left;
   width: 50%;
   padding: 10px;
   height: 300px;
@@ -48,12 +47,12 @@
   width: 10rem;
   height: 3rem;
 }
+
 .body-title{
   margin-left: 5rem;
 }
 /* Flights related css */
 .page-container{
-  
   width: 90%;
   margin: auto;
   padding: 20px;
@@ -67,6 +66,9 @@
   padding: 10px;
   text-align: center;
 }
+.passengers-table {
+}
+
 .flights-list-pic {
   width: 600px;
   height: 600px;
@@ -74,6 +76,7 @@
   right: 0px;
   padding: 10px;
 }
+
 .flight{
   
   border: 3px solid #e6e6e6;
@@ -93,15 +96,6 @@
 }
 
 /* Flight details */
-.flight-details{
-  background-color: #f5f5f5;
-  width: 50%;
-  margin: auto;
-  border: 3px solid #e6e6e6;
-  padding: 10px;
-  align-items: center;
-  text-align: center;
-}
 .flight-details-pic{
   width: 600px;
   height: 600px;
@@ -200,4 +194,76 @@
   position: absolute;
   right: 0px;
   padding: 10px;
+}
+
+.float-container{
+    padding: 1em;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+    paddign: 10px;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.small-block {
+    width: 30%
+}
+
+.images {
+  width: 600px;
+  height: 600px;
+}
+
+
+.logo-image {
+    width: calc(3rem + 8vw);
+    height: auto;
+}
+
+.info-label {
+    font-size: calc(0.3rem + 0.9vw);
+    text-align:right;
+    margin-top: 1rem;
+    color: #595959;
+
+}
+.info-text {
+  font-size: calc(0.3rem + 1.2vw);
+  text-align:left;
+  padding-left: 1rem;
+}
+
+.details-container-outer {
+    display: flex;
+    align: center;
+    justify-content: center;
+}
+.details-container {
+    flex-direction: column;
+    width: 50%;
+    text-align: left;
+    align: center;
+}
+.details-container-inner {
+    flex-direction: column;
+    margin: auto;
+    align-items:center;
+    background-color: #f5f5f5;
+    border: 3px solid #e6e6e6;
+    border-radius: 25px;
+}
+
+.flight-details{
+  background-color: #f5f5f5;
+  width: 50%;
+  margin: auto;
+  border: 3px solid #e6e6e6;
+  padding: 10px;
+  align-items: center;
+  text-align: center;
 }

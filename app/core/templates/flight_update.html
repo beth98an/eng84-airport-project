@@ -25,9 +25,11 @@
 
   </br>
 
-    <input type="submit" value="Save" class="btn btn-primary">
+    <input type="submit" value="Save" class="btn btn-info">
     &nbsp; &nbsp;
-    <a href="{% url 'index' %}" >Cancel</a>
+    <a href="{% url 'flight_detail' object.flight_id %}" class="btn btn-secondary">Cancel</a>
+    &nbsp; &nbsp;
+    <a href="{% url 'flight_delete' object.flight_id %}" class="btn btn-danger">Delete</a>
   </div>
   </form>
 </div>

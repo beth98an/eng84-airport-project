@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import AbstractBaseUser, UserManager, User
 
@@ -14,7 +15,22 @@ class Person(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
-class Staff(User):
+class Staff(User): 
+    PILOT = "PILOT"
+    FLIGHT_ATTENDANT = "FLIGHT ATTENDANT"
+    TICKET_AGENT = "TICKET AGENT"
+    ADMIN= "ADMIN"
+
+
+    ROLES = [
+            (PILOT, _('Pilot')),
+            (FLIGHT_ATTENDANT, _('Flight Attendant')),
+            (TICKET_AGENT, _('Ticket Agent')),
+            (ADMIN, _('Admin')),
+            ]
+ 
+    dob = models.DateField()
+    role = models.CharField(max_length=30, choices=ROLES)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -49,6 +65,7 @@ class Flight(models.Model):
     duration = models.TimeField('Duration')
     aircraft_id = models.ForeignKey('Aircraft', on_delete=models.CASCADE)
     attendance = models.ManyToManyField(Passenger, blank=True)
+    crew = models.ManyToManyField(Staff, blank=True)
 
     # Method that finds the url of a particular flight, given its id
     def get_absolute_url(self):

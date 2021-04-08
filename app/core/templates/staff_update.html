@@ -25,9 +25,11 @@
 
   </br>
 
-    <input type="submit" value="Save" class="btn btn-primary">
+    <input type="submit" value="Save" class="btn btn-info">
     &nbsp; &nbsp;
-    <a href="{% url 'staff_detail' object.pk %}" >Cancel</a>
+    <a href="{% url 'staff_detail' object.pk " class="btn btn-secondary" >Cancel</a>
+    &nbsp; &nbsp;
+    <a href="{% url 'staff_delete' object.pk %}" class="btn btn-danger">Delete</a>
   </div>
   </form>
 </div>
