@@ -5,11 +5,12 @@ from django.conf.urls.static import static
 
 from .views import (HomeView, FlightListView, PassengerListView, FlightDetailView, FlightCreateView,
                     FlightUpdateView, AircraftListView, AircraftCreateView, PassengerView, PassengerDetailView,
-                    AircraftDetailView)
+                    AircraftDetailView, AirportAppLoginView, StaffCreateView, StaffDetailView, StaffListView, StaffUpdateView)
 
 urlpatterns = [
         path('', HomeView.as_view(), name='index'),
         path('home/', HomeView.as_view(), name='index'),
+        path('login/', AirportAppLoginView.as_view(), name='login'),
         path('flights/', FlightListView.as_view(), name='flights'),
         path('passengers/', PassengerListView.as_view(), name='passengers'),
         path('add_passenger/', PassengerView.as_view(), name='add_passengers'),
@@ -20,4 +21,8 @@ urlpatterns = [
         path('aircrafts/', AircraftListView.as_view(), name='aircrafts'),
         path('aircrafts/<int:pk>', AircraftDetailView.as_view(), name='aircraft_details'),
         path('aircrafts/create', AircraftCreateView.as_view(), name='aircraft_create'),
+        path('staff/' StaffListView.as_view(), name='steff_list' ),
+        path('staff/<int:pk>' StaffDetailView.as_view(), name='steff_detail' ),
+        path('staff/create' StaffCreateView.as_view(), name='steff_create' ),
+        path('staff/<int:pk>/edit' StaffUpdateView.as_view(), name='steff_update' ),
         ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

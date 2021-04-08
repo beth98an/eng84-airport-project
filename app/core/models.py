@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from django.contrib.auth.models import AbstractBaseUser
+
 
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
@@ -12,9 +14,15 @@ class Person(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
-class Staff(Person):
-    employee_id = models.AutoField(primary_key=True)
+class Staff(AbstractBaseUser, Person):
+    # employee_id = models.AutoField(primary_key=True)
 
+    email = models.CharField(max_length=100, unique=True)
+    role = models.CharField(max_length=30)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ['first_name',]
+    
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
@@ -24,7 +32,7 @@ class Passenger(Person):
     """
     Class that defines the passenger users.
     """
-    passport_num = models.CharField(max_length=10)
+    passport_num = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

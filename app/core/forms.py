@@ -38,3 +38,23 @@ class PassengerForm(forms.ModelForm):
                 'dob': _('Date of Birth'),
                 'passport_num': _('Passport Number')
                 }
+
+
+class StaffForm(forms.ModelForm):
+    class Meta:
+        model = Staff 
+        fields = ('first_name', 'last_name', 'dob', 'email', 'role', 'password')
+
+        widgets = {
+                'email': forms.EmailField(attrs={'class': 'form-control'}),
+                'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+                'first_name': forms.TextInput(attrs={'class': 'form-control', }),
+                'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+                'dob': DatePickerInput(attrs={'label': 'Date of Birth'}),
+                'role': forms.TextInput(attrs={'class': 'form-control'}),
+
+                }
+
+        labels = {
+                'dob': _('Date of Birth'),
+                }

@@ -8,6 +8,7 @@ Python Project for SpartaGlobal Engineering 84 DevOps Stream.
 - [Documentation](#documentation)
 - [Gitflow](#gitflow)
 - [Project Structure](#project-structure)
+- [Entity Relationship Diagram](#entity-relationship-diagram)
 
 ## User Stories
 

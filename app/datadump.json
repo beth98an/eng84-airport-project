@@ -1,0 +1,64 @@
+[
+{
+  "model": "core.person",
+  "pk": 1,
+  "fields": {
+    "first_name": "Eugene",
+    "last_name": "Kavanagh",
+    "dob": "1996-12-17"
+  }
+},
+{
+  "model": "core.person",
+  "pk": 2,
+  "fields": {
+    "first_name": "Alexis",
+    "last_name": "Othonos",
+    "dob": "1996-10-07"
+  }
+},
+{
+  "model": "core.staff",
+  "pk": 2,
+  "fields": {
+    "password": "capitalS",
+    "last_login": null,
+    "email": "alexis@airportapp.com",
+    "role": "Security"
+  }
+},
+{
+  "model": "core.passenger",
+  "pk": 1,
+  "fields": {
+    "passport_num": "9806 3549"
+  }
+},
+{
+  "model": "core.aircraft",
+  "pk": 1,
+  "fields": {
+    "model": "737",
+    "manufacturer": "Boeing",
+    "capacity": 215
+  }
+},
+{
+  "model": "core.aircraft",
+  "pk": 2,
+  "fields": {
+    "model": "737",
+    "manufacturer": "Boeing",
+    "capacity": 215
+  }
+},
+{
+  "model": "core.aircraft",
+  "pk": 3,
+  "fields": {
+    "model": "A320",
+    "manufacturer": "Airbus",
+    "capacity": 180
+  }
+}
+]
