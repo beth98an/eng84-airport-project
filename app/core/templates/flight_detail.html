@@ -16,6 +16,10 @@
 <p>
 Aircraft: {{ queryset.aircraft_id}}
 </p>
+
+</br>
+<h4>Available Seats: </h4>
+
 <h3>
   Passengers
 </h3>
@@ -28,7 +32,7 @@ Aircraft: {{ queryset.aircraft_id}}
   {% endfor %}
 </ul>
 
-<a href="{% url 'flight_edit' queryset.flight_id %}">Edit Flight</a>
+<a href="{% url 'flight_update' queryset.flight_id %}">Edit Flight</a>
 
 {% endblock %}
 

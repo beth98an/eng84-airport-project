@@ -3,28 +3,25 @@
 
 
 {% block head_title %}Airport App Passengers List{% endblock %}
-{% block body_title %}Passengers{% endblock %}
+{% block body_title %}Add Passenger{% endblock %}
 
 
-
-<!--<hr>-->
-
-
-<!--<ul style="list-style-type:none"> -->
-<!--  {% for passenger in queryset %}-->
-<!--  <li> {{passenger}} </li>-->
-<!--  {% endfor %}-->
-<!--</ul>-->
 {% block content %}
 
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
 
-    <p>add passenger</p>
+    {{form.media}}
+
+
+<div class="form-container">
     <form method="POST">
         {% csrf_token %}
         {{form.as_p }}
         <button type="submit" class="btn btn-info">Add passenger</button>
 
     </form>
-
+</div>
 
 {% endblock %}

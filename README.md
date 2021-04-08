@@ -124,3 +124,12 @@ You should have 4 configured remote repo 2 for your forked repo as `origin` and 
 - The safe way would be to
   `git fetch upstream` first, and then
   `git merge upstream/main`
+
+## Entity Relationship Diagram
+
+![ERD](./assets/Airport_ERD.png)
+
+Our diagram is based on the User stories as well as on the different functionalities that our interface will cover.
+Django’s model makes use of a powerful ORM layer which simplifies dealing with the database and the data and accelerates the development process. Easy Database Migrations and easy database management. In this way we can have a persistent database for the reason that we will be using SQLite.
+- On one hand we have the entity of staff and login that have a one-to-one relationship because each user has their own login details and does not belong to anyone else. Database allows you to create whatever you want but we will restrict from people some functions. For that reason we have these two entities in the backend so that only we can control it.
+- On the other hand we have the entities of flight and user, which is a many-to-many relationship since a user can have several flights and a flight can have several users. The last entity that we have is aircraft that has a relationship of one to many for the reason that an airplane can be assigned to different flights but a flight can only have one airplane for the trip obviously. These entities are the ones that will be used the most depending on the assistant and the functionalities and thanks that django is going to generate the database automatically with which we can migrate it and make use of it, and this is the reason that we have it separated.
