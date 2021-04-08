@@ -1,5 +1,6 @@
 from django import forms
 from django.forms.models import ModelForm
+# from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 # from crispy_forms.layout import Submit, Layout, Div, Fieldset
@@ -55,13 +56,22 @@ class StaffForm(forms.ModelForm):
                 'password': forms.PasswordInput(attrs={'class': 'form-control'}),
                 }
 
-    def clean_passwords(self, *args, **kwargs):
+    def clean(self, *args, **kwargs):
+        data = super().clean()
+        print()
+        print(data)
+        print()
         password1 = self.cleaned_data.get('password', None)
         password2 = self.cleaned_data.get('password_confirm', None)
-        if password1 and password2 and password1==password2:
-            return password1
+        print(f'Got passwords: {password1} and {password2}')
+        if password1 and password2:
+            if password1 == password2:
+                return data
+            else:
+                raise forms.ValidationError(_('Passwords do not match'))
+            return data
         else:
-            raise ValidationError('Incorrect password field')
+            raise ValidationError(_('Password field is empty'))
         return None
 
 

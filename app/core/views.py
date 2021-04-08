@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import HttpResponseRedirect
 
-#
 from .models import Person, Staff, Passenger, Flight, Aircraft
 from .forms import FlightsForm, PassengerForm, StaffForm
 
@@ -140,8 +140,13 @@ class StaffCreateView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.username = self.request.email
+
+        print()
+        print(form.cleaned_data)
+        print()
+        self.object.username = form.cleaned_data.get('email')
         self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 

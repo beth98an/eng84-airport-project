@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block head_title %}AirportApp: Update Staff Details{% endblock%}
-{% block body_title %}Update Staff Details{% endblock %}
+{% block body_title %}Create Staff Details{% endblock %}
 
 {% block content %}
 
@@ -16,12 +16,8 @@
   <form method="post" >
     <div class="form-group">
   {% csrf_token %}
-  {% for field in form %}
-    </br>
-    <p class="font-weight-bold">{{field.label}}</p>
-    <p> {{ field }} </p>
-    <strong>{{error|escape}}</strong>
-  {% endfor %}
+
+  {{ form.as_p }}
 
   </br>
 
