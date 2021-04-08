@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from django.contrib.auth.models import AbstractBaseUser, UserManager, User
+
 
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
@@ -12,11 +14,14 @@ class Person(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
-class Staff(Person):
-    employee_id = models.AutoField(primary_key=True)
+class Staff(User):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    def get_absolute_url(self):
+        return reverse("staff_detail", args=[str(self.pk)])
+
 
 
 # Note: Renamed from User to avoid conflicts
@@ -24,7 +29,7 @@ class Passenger(Person):
     """
     Class that defines the passenger users.
     """
-    passport_num = models.CharField(max_length=10)
+    passport_num = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

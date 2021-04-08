@@ -1,20 +1,44 @@
 
 {% extends 'base.html' %}
 
-{% block body_title %}List of passengers:{% endblock %}
+{% block body_title %}Users{% endblock %}
 
 
 {% block content %}
 <hr>
-<ul style="list-style-type:none">
-  {% for passenger in queryset %}
-     <a href="{{passenger.get_absolute_url}}" >
-  <li> {{passenger.id}}. {{passenger}} </li>
-  {% endfor %}
-</ul>
 
-<a href="{% url 'add_passengers' %}">Create new Passenger +</a>
+<div class = 'page-container'>
+  <a href="{% url 'add_passengers' %}" class="btn btn-primary">Create User</a>
+  <br>
 
+  <div class = 'table-container'>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">UserID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for user in queryset %}
+        <tr class='clickable-row' onclick="window.location='{{flight.get_absolute_url}}';">
+              <th scope="row">{{user.id}}</th>
+              <td>{{user.first_name}} {{user.last_name}}</td>
+              <td>{{user.dob}}</td>
+              <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+
+</div>
+
+
+{% load static %}
+<img class='passengers-list-pic' src="{% static "ilustrations/2.png" %}" alt="My image"/>
 {% endblock %}
 
 
