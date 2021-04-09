@@ -1,14 +1,17 @@
-from django.shortcuts import render
+from datetime import timedelta, datetime,date
 
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Person, Staff, Passenger, Flight, Aircraft
-from .forms import FlightsForm, PassengerForm, StaffForm
+from .models import Person, Staff, Passenger, Flight, Aircraft, Airport
+from .forms import FlightsForm, PassengerForm, StaffForm, AirportForm, AircraftForm
 
+from .vars import AIRPLANE_SPEED
+from .pricing import cost_of_flight
 """
            HOME-LOGIN
 """
@@ -23,7 +26,8 @@ class HomeView(ListView):
     def get_queryset(self):
         # Write the queryset of each object as key-value pair and pass all of them as a dictionary object
         queryset = {
-                'flights': Flight.objects.all(),
+                'arrivals': Flight.objects.filter(flight_type__exact='ARRIVAL'),
+                'departures': Flight.objects.filter(flight_type__exact='DEPARTURE'),
                 }
         return queryset
 
@@ -44,10 +48,19 @@ class PassengerListView(LoginRequiredMixin, ListView):
     context_object_name = 'queryset'
 
 
-class PassengerView(LoginRequiredMixin, CreateView):
+class PassengerCreateView(LoginRequiredMixin, CreateView):
     model = Passenger
     template_name = "passenger_create.html"
     form_class = PassengerForm
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+
+        date_of_birth = form.cleaned_data.get('dob')
+        age = (date.today() - date_of_birth).days /364.25
+        self.object.age = age
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class PassengerDetailView(LoginRequiredMixin, DetailView):
@@ -65,6 +78,14 @@ class PassengerUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'passenger_update.html'
     form_class = PassengerForm
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+
+        date_of_birth = form.cleaned_data.get('dob')
+        age = (date.today() - date_of_birth).days /364.25
+        self.object.age = age
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 class PassengerDeleteView(LoginRequiredMixin, DeleteView):
     model = Passenger
@@ -95,11 +116,25 @@ class FlightDetailView(LoginRequiredMixin, DetailView):
 
         # Count available seats
         full_capacity = self.object.aircraft_id.capacity
-        seats_taken = len(self.object.attendance.all())
+        seats_taken = len(self.object.attendance.all()) + len(self.object.crew.all())
         available = full_capacity - seats_taken
 
+        # Get price of flight
+
+        distance = self.object.destination.distance + self.object.origin.distance
+        cost = cost_of_flight(self.object.aircraft_id.weight, distance)
+
+        price = 100
+
+        payout = [price if passenger.age > 1 else 0 for passenger in self.object.attendance.all()]
+        revenue = sum(payout)
         # Add to context
-        context.update({'available': available})
+        context.update({
+            'available': available,
+            'cost': cost,
+            'revenue': revenue,
+            'payout': payout,
+            })
         print(context)
 
         return context
@@ -110,11 +145,52 @@ class FlightCreateView(LoginRequiredMixin, CreateView):
     template_name = 'flight_create.html'
     form_class = FlightsForm
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.attendance.set(form.cleaned_data.get('attendance'))
+        self.object.crew.set(form.cleaned_data.get('crew'))
+        distance = form.cleaned_data.get('connection').distance
+        duration = distance / AIRPLANE_SPEED
+        time = timedelta(hours = duration)
+        self.object.duration = str(time)
+        # Set destination / origin
+        ft = form.cleaned_data.get('flight_type')
+
+        if form.cleaned_data.get('flight_type') == "ARRIVAL":
+            self.object.destination = Airport.objects.get(id=1)
+            self.object.origin = form.cleaned_data.get('connection')
+        else:
+            self.object.origin = Airport.objects.get(id=1)
+            self.object.destination = form.cleaned_data.get('connection')
+
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
 
 class FlightUpdateView(LoginRequiredMixin, UpdateView):
     model = Flight
     template_name = 'flight_update.html'
     form_class = FlightsForm
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.attendance.set(form.cleaned_data.get('attendance'))
+        self.object.crew.set(form.cleaned_data.get('crew'))
+        distance = form.cleaned_data.get('connection').distance
+        duration = distance / AIRPLANE_SPEED
+        time = timedelta(hours = duration)
+        self.object.duration = str(time)
+        # Set destination / origin
+        ft = form.cleaned_data.get('flight_type')
+
+        if form.cleaned_data.get('flight_type') == "ARRIVAL":
+            self.object.destination = Airport.objects.get(id=1)
+            self.object.origin = form.cleaned_data.get('connection')
+        else:
+            self.object.origin = Airport.objects.get(id=1)
+            self.object.destination = form.cleaned_data.get('connection')
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class FlightDeleteView(LoginRequiredMixin, DeleteView):
@@ -137,7 +213,7 @@ class AircraftListView(LoginRequiredMixin, ListView):
 class AircraftCreateView(LoginRequiredMixin,CreateView):
     model = Aircraft
     template_name = 'aircraft_create.html'
-    fields = '__all__'
+    form_class = AircraftForm
 
 
 class AircraftDetailView(LoginRequiredMixin, DetailView):
@@ -185,3 +261,35 @@ class StaffDeleteView(LoginRequiredMixin, DeleteView):
     model = Staff
     template_name = 'staff_confirm_delete.html'
     success_url = reverse_lazy('staff_list')
+
+
+"""
+           AIRPORTS
+"""
+
+
+class AirportListView(LoginRequiredMixin, ListView):
+    model = Airport
+    template_name = 'airports.html'
+    context_object_name = 'queryset'
+
+    def get_queryset(self):
+        # Write the queryset of each object as key-value pair and pass all of them as a dictionary object
+        queryset = {
+                'current': Airport.objects.filter(id__exact=1).first(),
+                'other': Airport.objects.exclude(id__exact=1).all(),
+                }
+        return queryset
+
+
+class AirportCreateView(LoginRequiredMixin, CreateView):
+    model = Airport 
+    template_name = "airport_create.html"
+    form_class = AirportForm
+    success_url = reverse_lazy('airports')
+
+
+class AirportDetailView(LoginRequiredMixin, DetailView):
+    model = Airport 
+    template_name = 'staff_detail.html'
+    context_object_name = 'queryset'

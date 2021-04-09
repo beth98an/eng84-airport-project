@@ -1,8 +1,7 @@
-
 {% extends "base.html" %}
 
-{% block head_title %}AirportApp: Create Flight{% endblock%}
-{% block body_title %}Update Flight{% endblock %}
+{% block head_title %}Airport App Add Airport{% endblock%}
+{% block body_title %}Add Airport{% endblock %}
 
 {% block content %}
 
@@ -16,23 +15,18 @@
   <form method="post" >
     <div class="form-group">
   {% csrf_token %}
-  <!--
   {% for field in form %}
     </br>
     <p class="font-weight-bold">{{field.label}}</p>
     <p> {{ field }} </p>
     <strong>{{error|escape}}</strong>
   {% endfor %}
-  -->
-  {{form.as_p}}
 
   </br>
 
-    <input type="submit" value="Save" class="btn btn-info">
+    <input type="submit" value="Save" class="btn btn-primary">
     &nbsp; &nbsp;
-    <a href="{% url 'flight_detail' object.flight_id %}" class="btn btn-secondary">Cancel</a>
-    &nbsp; &nbsp;
-    <a href="{% url 'flight_delete' object.flight_id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'airports' %}" >Cancel</a>
   </div>
   </form>
 </div>

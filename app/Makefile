@@ -10,5 +10,5 @@ migration:
 
 
 datadump:
-	python manage.py dumpdata core --indent 2 > datadump.json
+	python manage.py dumpdata core auth --indent 2 > datadump.json
 
