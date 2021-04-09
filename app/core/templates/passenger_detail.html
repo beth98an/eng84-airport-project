@@ -26,10 +26,19 @@
 
     <div class="float-container">
     <p class="info-label inline-block">
-    Age:
+    Date of Birth:
     </p>
     <p class="info-text inline-block font-weight-bold">
       {{object.dob}}
+    </p>
+    </div>
+
+    <div class="float-container">
+    <p class="info-label inline-block">
+    Age:
+    </p>
+    <p class="info-text inline-block font-weight-bold">
+      {{object.age|floatformat:0}}
     </p>
     </div>
 

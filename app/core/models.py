@@ -9,6 +9,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     dob = models.DateField()
+    age = models.FloatField(blank=True, null=True)
     # ticket_number = models.IntegerField((), unique=True)
 
     def __str__(self):
@@ -55,17 +56,24 @@ class Passenger(Person):
 
 
 class Flight(models.Model):
+    DEPARTURE = "DEPARTURE"
+    ARRIVAL = "ARRIVAL"
+    FLIGHT_TYPE = [
+            (DEPARTURE, _('Departure')),
+            (ARRIVAL, _('Arrival'))
+            ]
     """
     Class that defines the model for a flight
     """
     flight_id = models.AutoField(primary_key=True)
-    origin = models.CharField(max_length=30)
-    destination = models.CharField(max_length=30)
+    origin = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='origin')
+    destination = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='destination')
+    flight_type = models.CharField(max_length=30, choices=FLIGHT_TYPE)
     departure_time = models.DateTimeField('Departure Time')
-    duration = models.TimeField('Duration')
+    duration = models.TimeField('Duration', blank=True)
     aircraft_id = models.ForeignKey('Aircraft', on_delete=models.CASCADE)
-    attendance = models.ManyToManyField(Passenger, blank=True)
-    crew = models.ManyToManyField(Staff, blank=True)
+    attendance = models.ManyToManyField(Passenger )
+    crew = models.ManyToManyField(Staff)
 
     # Method that finds the url of a particular flight, given its id
     def get_absolute_url(self):
@@ -84,6 +92,7 @@ class Aircraft(models.Model):
     model = models.CharField(max_length=10)
     manufacturer = models.CharField(max_length=20)
     capacity = models.IntegerField()
+    weight = models.IntegerField(default=50000)
 
     def __str__(self):
         return f'{self.model} no{self.aircraft_id} by {self.manufacturer}'
@@ -92,11 +101,18 @@ class Aircraft(models.Model):
         return reverse("aircraft_details", args=[str(self.aircraft_id)])
 
 
-# class Airport:
-#     def __init__(self, name_airport):
-#         self.name_airport = name_airport
-# 
-# 
+class Airport(models.Model):
+    """ Class that holds the information about an airport """
+    name = models.CharField(max_length=30, unique=True)
+    city = models.CharField(max_length=30)
+    country = models.CharField(max_length=30)
+    distance = models.FloatField()
+
+    def __str__(self):
+        return f'{self.name} {self.city}, {self.country}'
+
+
+
 # class Terminal:
 #     def __init__(self, name_terminal):
 #         self.name_terminal = name_terminal
