@@ -796,7 +796,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$xAHfKd2YniAk$kldduA9PnwkbjgGmYd6SVWLOdXHTAmtmjQXh9/IW1L8=",
-    "last_login": "2021-04-09T02:24:55.075Z",
+    "last_login": "2021-04-09T02:27:04.021Z",
     "is_superuser": true,
     "username": "alex",
     "first_name": "",

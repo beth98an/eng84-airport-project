@@ -146,9 +146,8 @@ class FlightCreateView(LoginRequiredMixin, CreateView):
     form_class = FlightsForm
 
     def form_valid(self, form):
+        print("\n\nTEST\n\n\n")
         self.object = form.save(commit=False)
-        self.object.attendance.set(form.cleaned_data.get('attendance'))
-        self.object.crew.set(form.cleaned_data.get('crew'))
         distance = form.cleaned_data.get('connection').distance
         duration = distance / AIRPLANE_SPEED
         time = timedelta(hours = duration)
@@ -164,6 +163,9 @@ class FlightCreateView(LoginRequiredMixin, CreateView):
             self.object.destination = form.cleaned_data.get('connection')
 
         self.object.save()
+        self.object.attendance.set(form.cleaned_data.get('attendance'))
+        self.object.crew.set(form.cleaned_data.get('crew'))
+        self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -173,9 +175,8 @@ class FlightUpdateView(LoginRequiredMixin, UpdateView):
     form_class = FlightsForm
 
     def form_valid(self, form):
+        print("\n\nTEST\n\n\n")
         self.object = form.save(commit=False)
-        self.object.attendance.set(form.cleaned_data.get('attendance'))
-        self.object.crew.set(form.cleaned_data.get('crew'))
         distance = form.cleaned_data.get('connection').distance
         duration = distance / AIRPLANE_SPEED
         time = timedelta(hours = duration)
@@ -189,6 +190,10 @@ class FlightUpdateView(LoginRequiredMixin, UpdateView):
         else:
             self.object.origin = Airport.objects.get(id=1)
             self.object.destination = form.cleaned_data.get('connection')
+
+        self.object.save()
+        self.object.attendance.set(form.cleaned_data.get('attendance'))
+        self.object.crew.set(form.cleaned_data.get('crew'))
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 

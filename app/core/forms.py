@@ -16,8 +16,6 @@ class FlightsForm(forms.ModelForm):
                                   queryset=Staff.objects.filter(role__in=["PILOT", "FLIGHT ATTENDANT"]),
                                   required=False
                                   )
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
     class Meta:
         model = Flight
