@@ -267,3 +267,9 @@
   align-items: center;
   text-align: center;
 }
+
+.login{
+  margin: auto;
+  padding-top: 10px;
+  padding-left: 30px;
+}
