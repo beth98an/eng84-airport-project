@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.models import AbstractBaseUser, UserManager, User
 
@@ -66,8 +67,8 @@ class Flight(models.Model):
     Class that defines the model for a flight
     """
     flight_id = models.AutoField(primary_key=True)
-    origin = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='origin')
-    destination = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='destination')
+    origin = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='origin', blank=True)
+    destination = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='destination', blank=True)
     flight_type = models.CharField(max_length=30, choices=FLIGHT_TYPE)
     departure_time = models.DateTimeField('Departure Time')
     duration = models.TimeField('Duration', blank=True)
@@ -81,7 +82,10 @@ class Flight(models.Model):
 
     # Method that makes the flight look pretty when printed (made into string)
     def __str__(self):
-        return f'Flight from {self.origin} to {self.destination}'
+        try:
+            return f"Flight from {self.origin} to {self.destination}"
+        except ObjectDoesNotExist:
+            return f"Prospective flight {self.flight_id}"
 
 
 class Aircraft(models.Model):
