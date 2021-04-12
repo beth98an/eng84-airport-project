@@ -6,22 +6,57 @@
 {% block content %}
 
 <hr>
-<h2 class=form-container>
-Upcoming Flights
-</h2>
-<div class = 'flights-list'>
-<ul  style="list-style-type:none"> 
-  {% for flight in queryset.flights %}
-  <li class="flight"> 
-      <div >
-        {{flight}} at {{flight.departure_time}}
-      </div>
-  </li>
-  {% endfor %}
-</ul>
-</div>
 
 
+<div class="page-container">
+<h3 class="cairo-font" >Departures</h3>
+  <div class = 'table-container'>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Flight Number</th>
+        <th scope="col">To</th>
+        <th scope="col">Departure Time</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for flight in queryset.departures %}
+        <tr>
+              <th scope="row">{{flight.flight_id}}</th>
+              <td>{{flight.destination}}</td>
+              <td>{{flight.departure_time}}</td> 
+        </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+  </div>
+
+  <br>
+  <br>
+
+<h3 class="cairo-font" >Arrivals</h3>
+  <div class = 'table-container'>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Flight Number</th>
+        <th scope="col">From </th>
+        <th scope="col">Arrival Time</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for flight in queryset.arrivals%}
+        <tr>
+              <th scope="row">{{flight.flight_id}}</th>
+              <td>{{flight.origin}}</td>
+              <td>{{flight.departure_time}}</td> 
+        </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+  </div>
 
 {% endblock %}
 

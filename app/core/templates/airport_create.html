@@ -1,8 +1,7 @@
-
 {% extends "base.html" %}
 
-{% block head_title %}AirportApp: Update Staff Details{% endblock%}
-{% block body_title %}Create Staff Details{% endblock %}
+{% block head_title %}Airport App Add Airport{% endblock%}
+{% block body_title %}Add Airport{% endblock %}
 
 {% block content %}
 
@@ -16,14 +15,18 @@
   <form method="post" >
     <div class="form-group">
   {% csrf_token %}
-
-  {{ form.as_p }}
+  {% for field in form %}
+    </br>
+    <p class="font-weight-bold">{{field.label}}</p>
+    <p> {{ field }} </p>
+    <strong>{{error|escape}}</strong>
+  {% endfor %}
 
   </br>
 
     <input type="submit" value="Save" class="btn btn-primary">
     &nbsp; &nbsp;
-    <a href="{% url 'staff_list' %}" >Cancel</a>
+    <a href="{% url 'airports' %}" >Cancel</a>
   </div>
   </form>
 </div>
